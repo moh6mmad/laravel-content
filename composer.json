@@ -1,0 +1,16 @@
+{
+    "name": "mohammad/laravel-contents",
+    "description": "Default simple package to add dynamic page & blog posts to Laravel app",
+    "autoload": {
+        "psr-4": {
+            "Moh6mmad\\LaravelContent\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Mohammad",
+            "email": "mohammad@lync.me"
+        }
+    ],
+    "require": {}
+}
