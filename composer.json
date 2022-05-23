@@ -1,5 +1,5 @@
 {
-    "name": "mohammad/laravel-contents",
+    "name": "moh6mmad/laravel-content",
     "description": "Default simple package to add dynamic page & blog posts to Laravel app",
     "autoload": {
         "psr-4": {

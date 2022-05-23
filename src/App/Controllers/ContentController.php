@@ -10,31 +10,22 @@ use Moh6mmad\LaravelContent\App\Models\Content;
 class ContentController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-    }
-
-    /**
     * Display a listing of the blog pages.
     *
     * @return \Illuminate\Http\Response
     */
-    public function blogIndex($category = '', $tag = '', Request $request)
+    public function index($category = '', $tag = '', Request $request)
     {
-        $posts = Content::where('page_group', 'blog')->where('status', '1');
+        $contents = Content::where('content_group', config('content.entity'))->where('status', '1');
         if (!empty($tag)) {
-            $posts = $posts->where('tags', 'like', '%'.$tag.'%');
+            $contents = $contents->where('tags', 'like', '%'.$tag.'%');
         }
         if (!empty($category)) {
-            $posts = $posts->where('category', 'like', '%'.$category.'%');
+            $contents = $contents->where('category', 'like', '%'.$category.'%');
         }
         
-        $posts = $posts->orderBy('id', 'desc')->paginate(9);
-        return view('blog.index', compact('posts'));
+        $contents = $contents->orderBy('id', 'desc')->paginate(9);
+        return view('laravel-content::index', compact('contents'));
     }
 
     /**
@@ -72,7 +63,7 @@ class ContentController extends Controller
         $m = floor($word / 200) + 1;
         $page->estimate_reading = $m . ' minute' . ($m == 1 ? '' : 's');
 
-        $page->related_posts = Content::inRandomOrder()->limit(2)->get();
+        $page->related_contents = Content::inRandomOrder()->limit(2)->get();
 
         return view('blog.show', $page);
     }
@@ -112,7 +103,7 @@ class ContentController extends Controller
      */
     public function HelpIndex()
     {
-        $helps = Content::where('page_group', 'help')->where('status', '1')->orderBy('category', 'asc')->get();
+        $helps = Content::where('content_group', 'help')->where('status', '1')->orderBy('category', 'asc')->get();
         return view('help.index', compact('helps'));
     }
 
