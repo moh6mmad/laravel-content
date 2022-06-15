@@ -25,7 +25,7 @@ class ContentController extends Controller
         }
         
         $contents = $contents->orderBy('id', 'desc')->paginate(9);
-        return view('laravel-content::pages.index', compact('contents'));
+        return view('laravel-content::content.index', compact('contents'));
     }
 
     /**
@@ -37,7 +37,7 @@ class ContentController extends Controller
     public function show($page_slug)
     {
         $page = Content::where('slug', $page_slug)->firstOrFail();
-        return view('laravel-content::pages.index', $page);
+        return view('laravel-content::content.index', $page);
     }
     /**
      * Display the specified resource.
@@ -55,7 +55,7 @@ class ContentController extends Controller
 
         $page->related_contents = Content::inRandomOrder()->limit(2)->get();
 
-        return view('laravel-content::pages.show', $page);
+        return view('laravel-content::content.show', $page);
     }
 
     /**
@@ -68,7 +68,7 @@ class ContentController extends Controller
     public function dynamic($urlkey = ''){
       
         $page = Content::where('slug', $urlkey)->firstOrFail();
-        return view('laravel-content::pages.index', $page);
+        return view('laravel-content::content.index', $page);
     }
 
     
